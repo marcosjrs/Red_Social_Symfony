@@ -50,7 +50,7 @@ Lo que hice fue:
 3.  crear las entidades con esa configuración
 `php .\bin\console doctrine:generate:entities BackendBundle`
 
-##Ejemplo para testear los tests del bundle 'BackendBundle'
+## Ejemplo para testear los tests del bundle 'BackendBundle'
 `.\vendor\bin\simple-phpunit .\tests\BackendBundle\`
 
 
