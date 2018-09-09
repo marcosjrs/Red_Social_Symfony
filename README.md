@@ -77,4 +77,20 @@ app_publication:
 ....
 ```
 
+##Ejemplo utilizando layouts
 
+En el layout tenemos por ejemplo :
+```
+<section>
+    {% block content %}
+    {# Para incluir todo el contenido #}
+    {% endblock %}
+</section>
+```
+
+Cuando se quiere utilizar, se puede hacer del siguiente modo:
+
+{% extends "@App/Layouts/layout.html.twig" %}
+{% block content %}
+Este es el contenido que se mostrará
+{% endblock %}

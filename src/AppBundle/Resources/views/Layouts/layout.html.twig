@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %} Red Social Symfony {% endblock %}</title>
+    {% block stylesheets %}
+    {# Para incluir css #}
+        <link href="{{ asset('assets/bootstrap/css/bootstrap.min.css') }}" type="text/css" rel="stylesheet" />
+        <link href="{{ asset('assets/css/bootstrap.cosmo.min.css') }}" type="text/css" rel="stylesheet" />
+        <link href="{{ asset('assets/css/style.css') }}" type="text/css" rel="stylesheet" />
+    {% endblock %}
+    {% block javascripts %}
+        <script src="{{asset('assets/js/jquery.min.js')}}"></script>
+        <script src="{{asset('assets/bootstrap/js/bootstrap.min.js')}}"></script>
+    {% endblock %}
+</head>
+<body>
+    <header>
+        <h1>Red Social</h1>
+    </header>
+    <section>
+        {% block content %}
+        {# Para incluir todo el contenido #}
+        {% endblock %}
+    </section>
+    <footer>
+        <hr/>
+        <p>Red Social creada con Symfony, JQuery y Bootstrap</p>
+    </footer>
+</body>
+</html>

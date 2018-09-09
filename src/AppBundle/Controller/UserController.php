@@ -9,6 +9,6 @@ class UserController extends Controller
 {
     public function loginAction(\Symfony\Component\HttpFoundation\Request $req)
     {
-        return $this->render('@App/login.html.twig');
+        return $this->render('@App/User/login.html.twig');
     }
 }
