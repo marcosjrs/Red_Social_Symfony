@@ -3,12 +3,12 @@
 namespace AppBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
 class UserController extends Controller
 {
-    public function loginAction()
+    public function loginAction(\Symfony\Component\HttpFoundation\Request $req)
     {
-        echo "Renderizara la pagina Login de la aplicacion";
-        die();
+        return $this->render('@App/login.html.twig');
     }
 }
