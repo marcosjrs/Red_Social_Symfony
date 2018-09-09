@@ -35,7 +35,7 @@ Lo que hice fue:
 2. Ejecutar el comando: 
 `composer update`
 
-3. Modificar la llamada de renderización en el DefaultContoller del bundle creado, ya que no encontraba el twig, de la forma creada con el comando:
+3. Modificar la llamada de renderización en el DefaultContoller del bundle creado (ya que de otra forma no encontraba el twig):
 `return $this->render('@Backend/Default/index.html.twig');`
 
 
