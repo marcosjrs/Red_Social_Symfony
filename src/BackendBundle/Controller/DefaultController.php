@@ -8,6 +8,12 @@ class DefaultController extends Controller
 {
     public function indexAction()
     {
-        return $this->render('@Backend/Default/index.html.twig');
+        
+        $em = $this->getDoctrine()->getManager();
+        $userRepo = $em->getRepository("BackendBundle:User");
+        $user = $userRepo->find(1);
+        return $this->render('@Backend/Default/index.html.twig', [
+            'nombre' => $user->getName(),
+        ]);
     }
 }
