@@ -53,6 +53,28 @@ Lo que hice fue:
 ## Ejemplo para ejecutar los tests de un bundle, por ejemplo el 'BackendBundle'
 `.\vendor\bin\simple-phpunit .\tests\BackendBundle\`
 
+## Ejemplo de ruteado del proyecto con yml
 
+Se ha cargado en el routing.yml de la aplicación(app\config), el routing.xml del /Resources/config del AppBundle, del siguiente modo:
+```
+app:
+    resource: '@AppBundle/Resources/config/routing.yml'
+    prefix: /
+```
+
+En ese routing.yml (del AppBundle) a su vez  se indica quien se responsabiliza del path de la home / y se cargan el resto(donde tambien se indicarn el path y el action correspondiente)
+
+```
+app_homepage:
+    path:     /
+    defaults: { _controller: AppBundle:User:login }
+app_user:
+    resource: "@AppBundle/Resources/config/routing/user.yml"
+    prefix: /
+app_publication:
+    resource: "@AppBundle/Resources/config/routing/publication.yml"
+    prefix: /
+....
+```
 
 
