@@ -38,5 +38,18 @@ Lo que hice fue:
 3. Modificar la llamada de renderización en el DefaultContoller del bundle creado (ya que de otra forma no encontraba el twig):
 `return $this->render('@Backend/Default/index.html.twig');`
 
+## Comando para traer las tablas creando las entities correspondientes (previa creación de BBDD, y posterior configuración del proyecto cuando se ha creado)
+
+1. Generar la configuración en yml
+
+`php .\bin\console doctrine:mapping:import BackendBundle yml`
+
+2. Tras la modificación de la configuración de los yml (por ejemplo para poner los nombres en singular de las entities), actualizamos 
+`php bin/console doctrine:schema:update --force`
+
+3.  crear las entidades con esa configuración
+`php .\bin\console doctrine:generate:entities BackendBundle`
+
+
 
 
