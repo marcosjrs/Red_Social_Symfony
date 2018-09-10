@@ -36,7 +36,15 @@
             </div><!-- /.container-fluid -->
         </nav>        
     </header>
-    <section>
+    <section id="content">
+        <div class="container">
+            <div>
+                {% for mensaje in app.session.flashbag().get('status') %}
+                    <div class="alert alert-info">{{mensaje}}</div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="clearfix"></div>
         {% block content %}
         {# Para incluir todo el contenido #}
         {% endblock %}

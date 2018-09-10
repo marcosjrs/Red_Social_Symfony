@@ -283,5 +283,21 @@ class User
     {
         return $this->image;
     }
+
+    /**
+     * Explicación de porqué se integró este metodo de esta forma (sacada de documentación):
+     * Symfony uses a specific method to combine the salt and encode the password before comparing it to your encoded password. 
+     * If getSalt() returns nothing, then the submitted password is simply encoded using the algorithm you specify in security.yaml. 
+     * If a salt is specified, then the following value is created and then hashed via the algorithm: $password.'{'.$salt.'}'
+     * @return string
+     */
+    public function getSalt() {
+        return null; // Devolvemos null para que lo coja del security.yml
+    }
+    
+    public function __toString()
+    {
+        return $this->name;
+    }
 }
 
