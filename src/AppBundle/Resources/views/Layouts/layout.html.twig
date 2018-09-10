@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <title>{% block title %} Red Social Symfony {% endblock %}</title>
     {% block stylesheets %}
-    {# Para incluir css #}
         <link href="{{ asset('assets/bootstrap/css/bootstrap.min.css') }}" type="text/css" rel="stylesheet" />
         <link href="{{ asset('assets/css/bootstrap.cosmo.min.css') }}" type="text/css" rel="stylesheet" />
         <link href="{{ asset('assets/css/style.css') }}" type="text/css" rel="stylesheet" />
@@ -16,16 +15,37 @@
 </head>
 <body>
     <header>
-        <h1>Red Social</h1>
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">                    
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-principal" aria-expanded="false">
+                        <span class="sr-only">Navegación</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="{{path('app_homepage')}}"><span class="glyphicon glyphicon-cloud" aria-hidden="true"></span> Red Social</a>
+                </div>
+                
+                <div class="collapse navbar-collapse" id="navbar-principal">
+                    <ul class="nav navbar-nav">
+                        <li><a href="{{path('app_homepage')}}"><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> Entrar </a></li>
+                        <li><a href="futuro_path_a_login"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Login</a></li>
+                    </ul>
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+        </nav>        
     </header>
     <section>
         {% block content %}
         {# Para incluir todo el contenido #}
         {% endblock %}
     </section>
-    <footer>
+    <footer class="col-md-12 fixed-bottom">
         <hr/>
-        <p>Red Social creada con Symfony, JQuery y Bootstrap</p>
+        <div class="container">            
+            <p class="text-center text-muted">Red Social creada con Symfony, JQuery y Bootstrap</p>
+        </div>
     </footer>
 </body>
 </html>

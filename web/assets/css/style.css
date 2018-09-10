@@ -1,0 +1,17 @@
+/* Navbar */
+.navbar-inverse .navbar-nav>li>a {
+    color: #dedede;
+}
+.navbar-inverse .navbar-nav>li>a:hover {
+    background-color: #0b60bf;
+}
+.navbar-inverse a.navbar-brand{
+    margin-top: -3px;
+}
+
+/* Footer*/
+.fixed-bottom {
+    position: fixed;
+    left: 0;
+    bottom: 10px;
+}
