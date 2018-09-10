@@ -1,3 +1,7 @@
+body{
+    background-color: #eee
+}
+
 /* Navbar */
 .navbar-inverse .navbar-nav>li>a {
     color: #dedede;
@@ -7,6 +11,17 @@
 }
 .navbar-inverse a.navbar-brand{
     margin-top: -3px;
+}
+
+/* Register */
+.box-form{
+    background: white;
+    border: 1px solid #cccccc;
+    padding: 0 20px 20px 20px;
+}
+
+.box-form input{
+    margin-bottom: 10px;
 }
 
 /* Footer*/

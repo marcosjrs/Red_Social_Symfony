@@ -29,8 +29,8 @@
                 
                 <div class="collapse navbar-collapse" id="navbar-principal">
                     <ul class="nav navbar-nav">
-                        <li><a href="{{path('app_homepage')}}"><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> Entrar </a></li>
-                        <li><a href="futuro_path_a_login"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Login</a></li>
+                        <li><a href="{{path('login')}}"><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> Entrar </a></li>
+                        <li><a href="{{path('register')}}"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Registrar</a></li>
                     </ul>
                 </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->
@@ -41,7 +41,7 @@
         {# Para incluir todo el contenido #}
         {% endblock %}
     </section>
-    <footer class="col-md-12 fixed-bottom">
+    <footer class="col-md-12">
         <hr/>
         <div class="container">            
             <p class="text-center text-muted">Red Social creada con Symfony, JQuery y Bootstrap</p>
