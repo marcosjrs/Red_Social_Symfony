@@ -1,7 +1,7 @@
 # Red Social Symfony
 
 
-Es un proyecto con un fin educativo (el de refrescar mis conocimientos). Está creado con Symfony, JQuery y Bootstrap.
+Es un proyecto con un fin educativo (el de refrescar mis conocimientos). Está creado con Symfony, JQuery y Bootstrap. Con vistas acopladas (renderizado desde servidor).
 
 La base del proyecto es la symfony/framework-standard-edition, creado con composer a partir de la instrucción: 
 
@@ -77,7 +77,7 @@ app_publication:
 ....
 ```
 
-##Ejemplo utilizando layouts
+## Ejemplo utilizando layouts
 
 En el layout tenemos por ejemplo :
 ```
@@ -89,8 +89,26 @@ En el layout tenemos por ejemplo :
 ```
 
 Cuando se quiere utilizar, se puede hacer del siguiente modo:
-
+```
 {% extends "@App/Layouts/layout.html.twig" %}
 {% block content %}
 Este es el contenido que se mostrará
 {% endblock %}
+```
+
+## Para configurar en User se utilizará un encoder con el algoritmo bcrypt con 4 veces encriptado
+
+1. Lo establecemos dentro de security > enconders del archivo security.yml, de la siguiente forma:
+```
+        BackendBundle\Entity\User:
+            algorithm: bcrypt
+            cost: 4 
+```
+2. Luego, en el futuro podremos "recoger" el algoritmo de encriptado asignado a BackendBundle\Entity\User y utilizarlo para encriptar, por ejemplo, de la siguiente forma:
+```
+$user = new User(); //Instancia de BackendBundle\Entity\User
+$encoders = $this->get("security.encoders_factory");
+$encoder = $encoders->getEncoder($user); // Recogeríamos el algoritmo de encriptado configurado para BackendBundle\Entity\User
+$passEncriptada = $encoder->encodePassword($passSinEncriptar, null);// Encriptariamos con esa configuracion
+      
+```

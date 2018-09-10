@@ -1,6 +1,11 @@
 # To get started with security, check out the documentation:
 # https://symfony.com/doc/current/security.html
 security:
+    encoders:
+        # Indicamos que en User se utilizará un encoder con el algoritmo bcrypt con 4 veces encriptado
+        BackendBundle\Entity\User:
+            algorithm: bcrypt
+            cost: 4    
 
     # https://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
     providers:
