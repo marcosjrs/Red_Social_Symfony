@@ -1,11 +1,12 @@
 <?php
 
 namespace BackendBundle\Entity;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * User
  */
-class User
+class User implements UserInterface
 {
     /**
      * @var integer
@@ -293,6 +294,33 @@ class User
      */
     public function getSalt() {
         return null; // Devolvemos null para que lo coja del security.yml
+    }
+    
+    /**
+     * Requisito de UserInterface
+     * Devolvemos email, porque así lo tuvimos en cuenta en la configuración de security.yml a la hora 
+     * de identificar que "funcionaría" como userName
+     */
+    public function getUsername()
+    {
+        return $this->email;
+    }
+    
+    /**
+     * Requisito de UserInterface
+     * Devuelve los posibles roles
+     */
+    public function getRoles()
+    {
+        return array('ROLE_USER', 'ROLE_ADMIN');
+    }
+    
+    /**
+     * Requisito de UserInterface
+     */
+    public function eraseCredentials()
+    {
+
     }
     
     public function __toString()

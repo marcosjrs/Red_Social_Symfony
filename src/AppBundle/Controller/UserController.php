@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use BackendBundle\Entity\User;
 use \AppBundle\Form\RegisterType;
 
@@ -19,8 +20,26 @@ class UserController extends Controller
     
     public function loginAction(Request $req)
     {
+        $authUtils = $this->get('security.authentication_utils'); // $authUtils es de tipo AuthenticationUtils
+        $lastAuthError = $authUtils->getLastAuthenticationError(); // comprueba si viene en el request, luego comprueba si está en session
+        $lasUsername = $authUtils->getLastUsername();// comprueba si viene en el request, luego comprueba si está en session
+        
+        return $this->render('@App/User/login.html.twig',array(
+            'last_username'=>$lasUsername,
+            'last_error'=>$lastAuthError
+        ));
+    }
+    
+    public function logoutAction(Request $req)
+    {
         return $this->render('@App/User/login.html.twig');
     }
+    
+    public function loginCheckAction(Request $req)
+    {
+        return $this->render('@App/User/login.html.twig');
+    }
+    
     
     public function registerAction(Request $req)
     {

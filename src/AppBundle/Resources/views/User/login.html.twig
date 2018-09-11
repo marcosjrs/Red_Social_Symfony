@@ -1,6 +1,19 @@
 
 {% extends "@App/Layouts/layout.html.twig" %}
 {% block content %}
-<h1>Página de login</h1>
-Esta página contendrá un formulario para realizar el login.
+    <div class="col-xs-10 col-xs-offset-1 col-md-8 col-md-offset-2 col-lg-4 col-lg-offset-4 box-form">
+        <h2>Identificarse</h2>
+        <hr/>
+        
+{#        Para mostrar los datos del usuario logado ('similar' a un var_dump con estilos):#}
+{#        {% if is_granted('ROLE_USER') %} {{ dump(app.user) }} {% endif %}#}
+
+        <form action="{{path('login_check')}}" method="POST">
+            <label>Email</label><input type="text" id="username" name="_username" value="{{last_username}}" class="form-control">
+            <label>Contraseña</label><input id="password" name="_password" type="password" class="form-control">
+            <input type="submit" value="Entrar" class="btn btn-success">
+            <input type="hidden" name="_target_path" value="/home">
+        </form>
+            
+    </div>
 {% endblock %}

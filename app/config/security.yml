@@ -9,6 +9,13 @@ security:
 
     # https://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
     providers:
+        #Indicamos cual va a ser el provider de la autentificacion, es decir, que entidad nos va a proporcionar la autentificacion del usuario
+        #donde el 'username' será en realidad el email
+        user_db_provider:
+            entity:
+                class: BackendBundle:User
+                property: email
+                
         in_memory:
             memory: ~
 
@@ -26,4 +33,12 @@ security:
             #http_basic: ~
 
             # https://symfony.com/doc/current/security/form_login_setup.html
-            #form_login: ~
+            # check_path es el path encargada de la comprobacion automatica del formulario
+            # target indica a donde nos va a llevar cuando salga de la sesion.
+            provider: user_db_provider
+            form_login:
+                login_path: /login
+                check_path: /login_check
+            logout:
+                path: logout
+                target: /

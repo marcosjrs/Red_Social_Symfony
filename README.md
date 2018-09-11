@@ -112,3 +112,55 @@ $encoder = $encoders->getEncoder($user); // Recogeríamos el algoritmo de encrip
 $passEncriptada = $encoder->encodePassword($passSinEncriptar, null);// Encriptariamos con esa configuracion
       
 ```
+
+## Ejemplo de configuración de login
+
+En el security.yml se añade en security > providers:
+```
+    #Indicamos cual va a ser el provider de la autentificacion, es decir, que entidad nos va a proporcionar la autentificacion del usuario donde como 'username' se utilizará el email. 
+    #Para esto User debe implementar Symfony\Component\Security\Core\User\UserInterface, e implementar  getCredentials, getUsername (que devolverá el email) y getRoles
+    user_db_provider:
+        entity:
+            class: BackendBundle:User
+            property: email
+```
+
+Y en el mismo archivo, en security > firewalls > main añadimos:
+```
+    # https://symfony.com/doc/current/security/form_login_setup.html
+    # check_path es el path encargada de la comprobacion automatica del formulario
+    # target indica a donde nos va a llevar cuando salga de la sesion.
+    provider: user_db_provider
+    form_login:
+        login_path: /login
+        check_path: /login_check
+    logout:
+        path: logout
+        target: /
+```
+
+Obviamente luego hay que implementar los actions correspondientes en el "BackendBundle:User" y  añadir en el user.yml las nuevas rutas a dichos actions. Para finalmente crear el formulario utilizando las variables correspondientes.
+Por ejemplo:
+```
+public function loginAction(Request $req)
+{
+    $authUtils = $this->get('security.authentication_utils'); // $authUtils es de tipo AuthenticationUtils
+    $lastAuthError = $authUtils->getLastAuthenticationError(); // comprueba si viene en el request, luego comprueba si está en session
+    $lasUsername = $authUtils->getLastUsername();// comprueba si viene en el request, luego comprueba si está en session
+    
+    return $this->render('@App/User/login.html.twig',array(
+        'last_username'=>$lasUsername,
+        'last_error'=>$lastAuthError
+    ));
+}
+```
+Y por ejemplo, el form añadido en la vista (de tipo .twig):
+```
+<form action="{{path('login_check')}}" method="POST">
+    <label>Email</label><input type="text" id="username" name="_username" value="{{last_username}}" class="form-control">
+    <label>Contraseña</label><input id="password" name="_password" type="password" class="form-control">
+    <input type="submit" value="Entrar" class="btn btn-success">
+    <input type="hidden" name="_target_path" value="/home">
+</form>
+```
+Con esto automáticamente recoge el usuario del modelo, con el email introducido, y comprueba que la pass está correcta, si es así redirige a /home
