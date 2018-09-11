@@ -4,3 +4,7 @@ login:
 register:
     path:     /register
     defaults: { _controller: AppBundle:User:register }
+check_nick_exists:
+    path:     /check-nick-exists
+    defaults: { _controller: AppBundle:User:checkNickExists }
+    methods: [POST]
