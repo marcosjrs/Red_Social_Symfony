@@ -164,3 +164,4 @@ Y por ejemplo, el form añadido en la vista (de tipo .twig):
 </form>
 ```
 Con esto automáticamente recoge el usuario del modelo, con el email introducido, y comprueba que la pass está correcta, si es así redirige a /home
+Y si tenemos un enlace con href="{{path('logout')}}" automáticamente cierra la sesión (no hace falta que implementemos nosotros el action)

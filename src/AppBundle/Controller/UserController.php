@@ -20,6 +20,10 @@ class UserController extends Controller
     
     public function loginAction(Request $req)
     {
+        //si ya está logado...
+        if( is_object($this->getUser()) ){
+            return $this->redirect("home");
+        }
         $authUtils = $this->get('security.authentication_utils'); // $authUtils es de tipo AuthenticationUtils
         $lastAuthError = $authUtils->getLastAuthenticationError(); // comprueba si viene en el request, luego comprueba si está en session
         $lasUsername = $authUtils->getLastUsername();// comprueba si viene en el request, luego comprueba si está en session
@@ -30,19 +34,13 @@ class UserController extends Controller
         ));
     }
     
-    public function logoutAction(Request $req)
-    {
-        return $this->render('@App/User/login.html.twig');
-    }
-    
-    public function loginCheckAction(Request $req)
-    {
-        return $this->render('@App/User/login.html.twig');
-    }
-    
     
     public function registerAction(Request $req)
     {
+        //si ya está logado...
+        if( is_object($this->getUser()) ){
+            return $this->redirect("home");
+        }
         $user = new User();
         $form = $this->createForm(RegisterType::class, $user); //se rellenará en user los datos rellenados en el form, cuando se haga submit.
         $form->handleRequest($req);

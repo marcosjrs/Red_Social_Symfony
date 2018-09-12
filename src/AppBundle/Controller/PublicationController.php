@@ -8,8 +8,9 @@ class PublicationController extends Controller
 {
     public function indexAction()
     {
-        echo "index";
-        die();
-
+        if( !is_object($this->getUser()) ){
+            return $this->redirect("login");
+        }
+         return $this->render('@App/Publication/home.html.twig');
     }
 }
