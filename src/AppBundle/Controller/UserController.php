@@ -8,7 +8,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use BackendBundle\Entity\User;
-use \AppBundle\Form\RegisterType;
+use AppBundle\Form\RegisterType;
+use AppBundle\Form\UserType;
 
 class UserController extends Controller
 {
@@ -42,8 +43,8 @@ class UserController extends Controller
             return $this->redirect("home");
         }
         $user = new User();
-        $form = $this->createForm(RegisterType::class, $user); //se rellenará en user los datos rellenados en el form, cuando se haga submit.
-        $form->handleRequest($req);
+        $form = $this->createForm(RegisterType::class, $user); //se rellenará el form con los datos
+        $form->handleRequest($req); //se bindeará las modificaciones hechas, en el formulario, y el $user utilizado para rellenar.
         $status = "";
         if($form->isSubmitted()){
             if($form->isValid()){
@@ -68,7 +69,7 @@ class UserController extends Controller
                         $em->flush();
                         return $this->redirect("login");
                     }catch(Exception $exc){
-                        $status = "No se han podido guardar los datos del usuario.";                       
+                        $status = "No se han podido guardar los datos correctamente";                       
                     }
                     
                 }else{
@@ -96,5 +97,61 @@ class UserController extends Controller
         $user = $userRepo->findOneBy(array("nick"=>$request->get("nick")));
         
         return new Response( $user ? "used" : "not used" );        
+    }
+    
+    public function editUserAction(Request $req){
+        $user = $this->getUser();//obtenemos los datos del usuario actual.
+        $imagenInicial = $user->getImage();//nombre del archivo inicialmente.
+        $form = $this->createForm(UserType::class, $user); //se rellenará el form con los datos
+        $form->handleRequest($req); //se bindeará las modificaciones hechas, en el formulario, y el $user utilizado para rellenar.
+        
+        $status = "";
+        if($form->isSubmitted()){
+            if($form->isValid()){ 
+                $valido = true;
+                $em = $this->getDoctrine()->getManager();
+                $query = $em->createQuery('SELECT u FROM BackendBundle:User u WHERE u.email = :email AND u.id = :id')                        
+                        ->setParameter('email', $form->get('email')->getData())
+                        ->setParameter('id', $user->getId());
+                $resultSameUser = $query->getResult();
+                if(count($resultSameUser) == 0){//cambió el email y no es de él. Debemos comprobar que no lo tenga otro
+                    $query2 = $em->createQuery('SELECT u FROM BackendBundle:User u WHERE u.email = :email')                        
+                        ->setParameter('email', $form->get('email')->getData());
+                    if(count($query2->getResult())>0){
+                         $status = "No está permitido utilizar ese email.";   
+                         $valido = false;
+                    }
+                }
+                if($valido){ //el email es de él o no existe.                  
+                    //upload file
+                    $file = $form["image"]->getData();
+                    if(!empty($file) && $file!=null){
+                        $ext = $file->guessExtension();
+                        if($ext == 'jpg' || $ext == 'jpeg' ||$ext == 'png'|| $ext=='gif'){
+                            $file_name= $user->getId().time().'.'.$ext;
+                            $file->move("uploads/users",$file_name);//guardamos el archivo en el directorio de uploads/users
+                            $user->setImage($file_name);
+                        }                        
+                    }else{
+                        $user->setImage($imagenInicial);
+                    }
+                    //persistencia
+                    try{                        
+                        $em->persist($user);
+                        $em->flush();
+                        $status = "Has modificado los datos correctamente.";
+                    }catch(Exception $exc){
+                        $status = "No se han podido guardar los datos correctamente.";                       
+                    } 
+                }
+            }else{
+                $status = "El formulario no se ha rellenado correctamente."; 
+            }
+            $this->session->getFlashBag()->add("status", $status);  
+            if(!$valido) return $this->redirect("edit-user");
+        }
+        return $this->render('@App/User/edit_user.html.twig', array(
+            "form" => $form->createView()
+        ));
     }
 }

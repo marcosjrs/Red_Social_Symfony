@@ -18,6 +18,11 @@ body{
     background-color: #0b60bf;
 }
 
+.nav .img-circle{
+    width: 19px;
+    height: 19px;
+}
+
 
 /* Register */
 .box-form{

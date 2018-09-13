@@ -38,11 +38,16 @@
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown">
                             <a class="dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true" >
+                                {% if app.user.image == null %}
+                                 <img src="{{asset('uploads/users/default.png')}}" class="img-circle">
+                                {% else %}
+                                    <img src="{{asset('uploads/users/'~app.user.image)}}" class="img-circle">
+                                {% endif%}
                                 {{app.user.name}} {{app.user.surname}} <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a href="" ><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Mi perfil</a></li>
-                                <li><a href="" ><span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Mis Datos</a></li>
+                                <li><a href="{{path("edit_user")}}" ><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Mi perfil</a></li>
+                                {#<li><a href="" ><span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Mis Datos</a></li>#}
                                 <li role="separator" class="divider"></li>
                                 <li><a href="{{path('logout')}}" ><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Cerrar sesión</a></li>
                                 <li><a href="" ><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> Ayuda</a></li>
