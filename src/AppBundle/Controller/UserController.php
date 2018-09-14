@@ -108,21 +108,13 @@ class UserController extends Controller
         $status = "";
         if($form->isSubmitted()){
             if($form->isValid()){ 
-                $valido = true;
                 $em = $this->getDoctrine()->getManager();
-                $query = $em->createQuery('SELECT u FROM BackendBundle:User u WHERE u.email = :email AND u.id = :id')                        
+                $query = $em->createQuery('SELECT u FROM BackendBundle:User u WHERE u.email = :email OR u.nick = :nick')                        
                         ->setParameter('email', $form->get('email')->getData())
-                        ->setParameter('id', $user->getId());
-                $resultSameUser = $query->getResult();
-                if(count($resultSameUser) == 0){//cambió el email y no es de él. Debemos comprobar que no lo tenga otro
-                    $query2 = $em->createQuery('SELECT u FROM BackendBundle:User u WHERE u.email = :email')                        
-                        ->setParameter('email', $form->get('email')->getData());
-                    if(count($query2->getResult())>0){
-                         $status = "No está permitido utilizar ese email.";   
-                         $valido = false;
-                    }
-                }
-                if($valido){ //el email es de él o no existe.                  
+                        ->setParameter('nick', $form->get('nick')->getData());
+                $result = $query->getResult();
+                $sonSusDatos = ($form->get('nick')->getData() == $user->getNick()) && ($form->get('email')->getData() == $user->getEmail());
+                if( $sonSusDatos || ( count($result) == 0) ){ //el email y nick son de de él o no existe nadie con esos datos.                  
                     //upload file
                     $file = $form["image"]->getData();
                     if(!empty($file) && $file!=null){
@@ -143,12 +135,13 @@ class UserController extends Controller
                     }catch(Exception $exc){
                         $status = "No se han podido guardar los datos correctamente.";                       
                     } 
+                }else{
+                    $status = "Nick o email no válido";       
                 }
             }else{
                 $status = "El formulario no se ha rellenado correctamente."; 
             }
             $this->session->getFlashBag()->add("status", $status);  
-            if(!$valido) return $this->redirect("edit-user");
         }
         return $this->render('@App/User/edit_user.html.twig', array(
             "form" => $form->createView()
