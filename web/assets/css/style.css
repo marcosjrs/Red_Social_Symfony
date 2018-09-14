@@ -23,6 +23,14 @@ body{
     height: 19px;
 }
 
+.search-people{
+    background-color: #2780e3;
+    border: none;
+}
+.search-people:hover {
+    background-color: #0b60bf;
+}
+
 
 /* Register y Users */
 .box-default, .box-form{

@@ -24,3 +24,7 @@ check_nick_exists:
 user_list:
     path: /people
     defaults: { _controller: AppBundle:User:users }
+
+user_search:
+    path: /search
+    defaults: { _controller: AppBundle:User:search }

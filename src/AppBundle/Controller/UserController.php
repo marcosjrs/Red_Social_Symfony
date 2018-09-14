@@ -153,7 +153,28 @@ class UserController extends Controller
     
     public function usersAction(Request $request){
         $em = $this->getDoctrine()->getManager();
-        $query = $em->createQuery("SELECT u FROM BackendBundle:User u");
+        $query = $em->createQuery("SELECT u FROM BackendBundle:User u ORDER BY u.id ASC");
+         
+        //Utilizamos el paginador para obtener los datos de la query de forma paginada.
+        $paginator = $this->get("knp_paginator");
+        $numUserShow = 5;
+        $pagination = $paginator->paginate($query, $request->query->getInt('page',1), $numUserShow);
+        
+        return $this->render('@App/User/users.html.twig', array(
+            'pagination' => $pagination
+        ));
+    }
+    
+    public function searchAction(Request $request){
+        $search = $request->get("search",null);
+        if($search == null){
+            return $this->redirect($this->generateUrl('home_publications'));
+        }
+        $em = $this->getDoctrine()->getManager();
+        $query = $em->createQuery("SELECT u FROM BackendBundle:User u "
+                . "WHERE u.name LIKE :search OR u.surname LIKE :search  OR u.nick LIKE :search "
+                . "ORDER BY u.id ASC")
+                ->setParameter('search',"%$search%");
          
         //Utilizamos el paginador para obtener los datos de la query de forma paginada.
         $paginator = $this->get("knp_paginator");
