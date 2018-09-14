@@ -67,6 +67,21 @@ swiftmailer:
     password: '%mailer_password%'
     spool: { type: memory }
 
+#KnpPaginatorBundle https://github.com/KnpLabs/KnpPaginatorBundle
+knp_paginator:
+    #numero de links enseñados en el menú de paginación
+    page_range: 5
+    default_options:
+        #nombre del parametro indentificador de la página será "page", el de ordenación será "sort"...
+        page_name: page
+        sort_field_name: sort
+        sort_direction_name: direction
+        distinct: true
+    #personalizaremos la plantilla de paginación (basandose en la propia de vendor\knplabs\knp-paginator-bundle\Resources\views\Pagination\twitter_bootstrap_v3_pagination.html)
+    template:
+        pagination: '@App/Layouts/custom_pagination.html.twig'
+        sortable: '@KnpPaginator/Pagination/sortable_link.html.twig'
+
 sensio_framework_extra:
    router:
         annotations: false

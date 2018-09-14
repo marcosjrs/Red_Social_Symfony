@@ -185,3 +185,30 @@ BackendBundle\Entity\User:
                 # utilizará la siguiente propiedad para comprobar la valided
                 checkMX: true
 ```
+
+## Ejemplo de configuración del paginador KnpPaginator
+https://github.com/KnpLabs/KnpPaginatorBundle
+
+1. Añadimos el Bundle en el AppKernel.php
+```
+new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
+```
+2. Personalizamos (si quisieramos) la vista del paginador, por ejemplo copiando el vendor\knplabs\knp-paginator-bundle\Resources\views\Pagination\twitter_bootstrap_v3_pagination.html
+en las vistas de nuestro bundle (modificándolo luego según nuestras necesidades), para luego vincularlo desde la configuración
+
+3. Configuramos en el config.yml (app\config\config.yml)
+```
+knp_paginator:
+    #numero de links enseñados en el menú de paginación
+    page_range: 5
+    default_options:
+        #nombre del parametro indentificador de la página será "page", el de ordenación será "sort"...
+        page_name: page
+        sort_field_name: sort
+        sort_direction_name: direction
+        distinct: true
+    #personalizaremos la plantilla de paginación (basandose en la propia de vendor\knplabs\knp-paginator-bundle\Resources\views\Pagination\twitter_bootstrap_v3_pagination.html)
+    template:
+        pagination: '@App/Layouts/custom_pagination.html.twig'
+        sortable: '@KnpPaginator/Pagination/sortable_link.html.twig'
+```
