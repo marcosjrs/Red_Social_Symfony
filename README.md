@@ -165,3 +165,23 @@ Y por ejemplo, el form añadido en la vista (de tipo .twig):
 ```
 Con esto automáticamente recoge el usuario del modelo, con el email introducido, y comprueba que la pass está correcta, si es así redirige a /home
 Y si tenemos un enlace con href="{{path('logout')}}" automáticamente cierra la sesión (no hace falta que implementemos nosotros el action)
+
+## Ejemplo de validación
+
+Creando un archivo llamado validation.yml dentro del Bundle (en este caso AppBundle) en la carpeta Resources\config\, hace la validación automáticamente de las propiedades de la entidad que se configure dentro de este, por ejemplo:
+```
+BackendBundle\Entity\User:
+    properties: 
+        name: 
+            - NotBlank: {message: "El nombre no puede estar vacío"}
+        surname: 
+            - NotBlank: {message: "Los apellidos no puede estar vacío"}
+        nick: 
+            - NotBlank: {message: "El nick no puede estar vacío"}
+        email: 
+            - NotBlank: {message: "El email no puede estar vacío"}
+            - Email: 
+                message: El email {{ value }} no es válido.
+                # utilizará la siguiente propiedad para comprobar la valided
+                checkMX: true
+```

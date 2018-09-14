@@ -1,0 +1,15 @@
+# Entidad a la que le vamos a validar las propiedades
+BackendBundle\Entity\User:
+    properties: 
+        name: 
+            - NotBlank: {message: "El nombre no puede estar vacío"}
+        surname: 
+            - NotBlank: {message: "Los apellidos no puede estar vacío"}
+        nick: 
+            - NotBlank: {message: "El nick no puede estar vacío"}
+        email: 
+            - NotBlank: {message: "El email no puede estar vacío"}
+            - Email: 
+                message: El email {{ value }} no es válido.
+                # utilizará la siguiente propiedad para comprobar la valided
+                checkMX: true
