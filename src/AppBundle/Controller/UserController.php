@@ -100,6 +100,10 @@ class UserController extends Controller
     }
     
     public function editUserAction(Request $req){
+        //si no está logado, no puede editar...
+        if(!is_object($this->getUser()) ){
+            return $this->redirect("login");
+        }
         $user = $this->getUser();//obtenemos los datos del usuario actual.
         $imagenInicial = $user->getImage();//nombre del archivo inicialmente.
         $form = $this->createForm(UserType::class, $user); //se rellenará el form con los datos

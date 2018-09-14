@@ -182,8 +182,8 @@ BackendBundle\Entity\User:
             - NotBlank: {message: "El email no puede estar vacío"}
             - Email: 
                 message: El email {{ value }} no es válido.
-                # utilizará la siguiente propiedad para comprobar la valided
-                checkMX: true
+                # A false para evitar problemas de dominios personalizados, etc
+                checkMX: false
 ```
 
 ## Ejemplo de configuración del paginador KnpPaginator
