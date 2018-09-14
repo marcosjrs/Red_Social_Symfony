@@ -24,8 +24,8 @@ body{
 }
 
 
-/* Register */
-.box-form{
+/* Register y Users */
+.box-default, .box-form{
     background: white;
     border: 1px solid #cccccc;
     padding: 0 20px 20px 20px;
@@ -33,6 +33,23 @@ body{
 
 .box-form input{
     margin-bottom: 10px;
+}
+
+.box-users .img-circle{
+    width: 60px;
+    height: 60px;
+}
+
+.user-item{
+    margin: 10px 0;
+}
+.user-item img{
+    float: left;
+}
+
+.user-item .user-item-content{
+   padding: 8px;
+    margin-left: 75px;
 }
 
 /* Footer*/
