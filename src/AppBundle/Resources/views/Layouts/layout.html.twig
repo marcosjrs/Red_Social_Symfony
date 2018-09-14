@@ -33,6 +33,11 @@
                         <li><a href="{{path('login')}}"><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> Entrar </a></li>
                         <li><a href="{{path('register')}}"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Registrar</a></li>
                     </ul>
+                    {% else %}
+                    <ul class="nav navbar-nav">
+                        <li><a href="{{path('app_homepage')}}"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Inicio </a></li>
+                        <li><a href="{{path('user_list')}}"><span class="glyphicon glyphicon-list" aria-hidden="true"></span> Gente </a></li>
+                    </ul>
                     {% endif %}
                     {% if app.user != null %} 
                     <ul class="nav navbar-nav navbar-right">

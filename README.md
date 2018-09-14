@@ -212,3 +212,31 @@ knp_paginator:
         pagination: '@App/Layouts/custom_pagination.html.twig'
         sortable: '@KnpPaginator/Pagination/sortable_link.html.twig'
 ```
+
+## Utilización del paginador KnpPaginator tras su configuración
+https://github.com/KnpLabs/KnpPaginatorBundle
+
+1.  Utilizamos la paginación sobre una query, por ejemplo
+```
+public function usersAction(Request $request){
+    $em = $this->getDoctrine()->getManager();
+    $query = $em->createQuery("SELECT u FROM BackendBundle:User u");
+        
+    //Utilizamos el paginador para obtener los datos de la query de forma paginada.
+    $paginator = $this->get("knp_paginator");
+    $numUserShow = 5;
+    $pagination = $paginator->paginate($query, $request->query->getInt('page',1), $numUserShow);
+    
+    return $this->render('@App/User/users.html.twig', array(
+        'pagination' => $pagination
+    ));
+}
+```
+
+2. En la vista lo renderizamos, por ejemplo:
+```
+<div class="navigation">
+    {# Le pasamos el atributo pasado desde el controller pagination #}
+    {{knp_pagination_render(pagination)}}             
+</div>
+```

@@ -20,3 +20,7 @@ check_nick_exists:
     path: /check-nick-exists
     defaults: { _controller: AppBundle:User:checkNickExists }
     methods: [POST]
+
+user_list:
+    path: /people
+    defaults: { _controller: AppBundle:User:users }
