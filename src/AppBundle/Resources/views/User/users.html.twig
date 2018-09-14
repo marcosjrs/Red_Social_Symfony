@@ -1,5 +1,10 @@
 
 {% extends "@App/Layouts/layout.html.twig" %}
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">  var URL_PRELOADER_USER = "{{asset('assets/images/ajax-loader.gif')}}"; </script>
+    <script src="{{asset('assets/js/custom/users.js')}}"></script>
+{% endblock %}
 {% block content %}
     <div class="container">
         <div class="col-xs-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2 box-default">
