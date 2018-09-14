@@ -113,8 +113,7 @@ class UserController extends Controller
                         ->setParameter('email', $form->get('email')->getData())
                         ->setParameter('nick', $form->get('nick')->getData());
                 $result = $query->getResult();
-                $sonSusDatos = ($form->get('nick')->getData() == $user->getNick()) && ($form->get('email')->getData() == $user->getEmail());
-                if( $sonSusDatos || ( count($result) == 0) ){ //el email y nick son de de él o no existe nadie con esos datos.                  
+                if( ( count($result) == 0) || ( ($result[0]->getNick() == $user->getNick()) && ($result[0]->getEmail() == $user->getEmail()) ) ){ //el email y nick son de de él o no existe nadie con esos datos.                  
                     //upload file
                     $file = $form["image"]->getData();
                     if(!empty($file) && $file!=null){
