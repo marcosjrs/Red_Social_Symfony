@@ -41,3 +41,8 @@ services:
     AppBundle\Twig\LongTimeExtension:
         tags:
             - {name:twig.extension}
+    AppBundle\Twig\LikedExtension:
+        arguments:
+            $doctrine: "@doctrine"
+        tags:
+            - {name:twig.extension}

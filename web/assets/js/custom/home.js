@@ -30,4 +30,26 @@ function publicationButtons(){
                 success:function(response){}
             })
     });
+
+    $("[data-toggle='tooltip']").tooltip();
+    
+    $(".btn-like").unbind("click").click(function(){
+        $(this).addClass("hidden");
+        $(this).parent().find(".btn-unlike").removeClass("hidden");
+        $.ajax({
+            url: URL_LIKE_PUBLICATION_SERVICE+"/"+$(this).attr("data-id"),
+            type:'GET',
+            success:function(response){}
+        })
+    });
+
+    $(".btn-unlike").unbind("click").click(function(){
+        $(this).addClass("hidden");
+        $(this).parent().find(".btn-like").removeClass("hidden");
+        $.ajax({
+            url: URL_UNLIKE_PUBLICATION_SERVICE+"/"+$(this).attr("data-id"),
+            type:'GET',
+            success:function(response){}
+        })
+    });
 }

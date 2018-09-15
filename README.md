@@ -326,5 +326,5 @@ public function removePublicationAction(Request $request, $id){
 
 ```
 
-De esta forma, podríamos luego llamarlo directamente, implementando la url como un href o llamando con una función de ajax, del estilo:
+De esta forma, podríamos luego llamarlo directamente, implementando la url como un href o llamando con una función de ajax
 
