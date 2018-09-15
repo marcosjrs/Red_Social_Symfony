@@ -7,8 +7,17 @@
            {#mensajes del usuario y de los que sigue#}
            <div class="box-content">
                {% for publication in pagination %}
-                <div>{{publication.text}}</div> 
-                <div>- {{publication.user.name}}</div>
+               <div class="col-lg-12 publication-item">
+                    {% if publication.user.image == null %}
+                        <img src="{{asset('uploads/users/default.png')}}" class="img-circle">
+                    {% else %}
+                        <img src="{{asset('uploads/users/'~publication.user.image)}}" class="img-circle">
+                    {% endif%}   
+                    <div class="publication-item-content">
+                        <div> <a class="link-user" href="">{{publication.user.nick}}</a> <span class="item-content-time">{{publication.createdAt |date('d-m-Y')}}</span></div>
+                        <div>{{publication.text}}</div> 
+                    </div>             
+               </div>
                 <hr/>
                {% endfor %}
            </div>
@@ -18,7 +27,7 @@
        </div>
        <div id="user-card" class="col-md-4 box-default pull-left">
            <div class="avatar">
-                {% if app.user.image == null %}
+            {% if app.user.image == null %}
                 <img src="{{asset('uploads/users/default.png')}}" class="img-circle">
             {% else %}
                 <img src="{{asset('uploads/users/'~app.user.image)}}" class="img-circle">

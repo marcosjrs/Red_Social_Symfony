@@ -169,6 +169,8 @@ class UserController extends Controller
         $search = $request->get("search",null);
         if($search == null){
             return $this->redirect($this->generateUrl('home_publications'));
+        }else{
+            $search = trim($search);
         }
         $em = $this->getDoctrine()->getManager();
         $query = $em->createQuery("SELECT u FROM BackendBundle:User u "
