@@ -11,4 +11,33 @@ $(document).ready(function(){
       ias.extension(new IASTriggerExtension({offset: 3, text:"Ver más"}));//cada bloque de 3 usuarios nos mostrará el "ver más"
       ias.extension(new IASSpinnerExtension({src: URL_PRELOADER_USER}));
       ias.extension(new IASNoneLeftExtension({text: "No hay más personas"}));
+
+      //escuchamos la carga de los bloques de usuarios, para cargar los listeners
+      ias.on('ready', function(event){ followButtons() });
+      ias.on('ready', function(event){ followButtons() });
 });
+
+function followButtons(){
+    $(".btn-follow").unbind("click").click(function(){
+        $(this).addClass("hidden"); //Una vez que se está siguiendo no se debe mostrar este boton, se debe mostrar la accion contraria. (Como un switch)
+        $(this).parent().find(".btn-unfollow").removeClass("hidden");
+        var followed = $(this).attr("data-followed");
+        $.ajax({
+            url: URL_FOLLOW_SERVICE,
+            type:'POST',
+            data: { followed:followed },
+            success:function(response){ }
+        });
+    });
+    $(".btn-unfollow").unbind("click").click(function(){
+        $(this).addClass("hidden"); //Una vez que se está siguiendo no se debe mostrar este,  se debe mostrar la accion contraria.
+        $(this).parent().find(".btn-follow").removeClass("hidden");
+        var followed = $(this).attr("data-followed");
+        $.ajax({
+            url: URL_UNFOLLOW_SERVICE,
+            type:'POST',
+            data: { followed:followed },
+            success:function(response){ }
+        });
+    });
+}
