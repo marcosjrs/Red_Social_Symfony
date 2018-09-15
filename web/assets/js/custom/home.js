@@ -18,5 +18,7 @@ $(document).ready(function(){
 });
 
 function publicationButtons(){
-   //para futuras acciones
+   $(".toggle-visibility-img").unbind("click").click(function(){
+       $(this).parent().find(".container-img-publication").fadeToggle();
+   });
 }

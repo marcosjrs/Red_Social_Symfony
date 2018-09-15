@@ -88,6 +88,24 @@ body{
     font-size: 12px;
 }
 
+.publication-item  .publication-item-content .glyphicon{
+    cursor: pointer;
+    margin-right: 7px;
+}
+
+.publication-item  .publication-item-content .container-img-publication{
+    display:none;
+    transition: all 300ms;
+}
+
+.publication-item  .publication-item-content .container-img-publication img{
+    width: 100%;
+    text-align: center;
+    display: block;
+    margin: 0px auto;
+    transition: all 300ms;
+}
+
 #user-card{
     padding: 10px;
     margin-bottom: 15px;

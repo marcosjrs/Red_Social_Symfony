@@ -23,7 +23,18 @@
                     <div class="publication-item-content">
                         <div> <a class="link-user" href="">{{publication.user.nick}}</a> <span class="item-content-time">{{publication.createdAt |long_time}}</span></div>
                         <div>{{publication.text}}</div> 
-                    </div>             
+                        {% if (publication.document is defined) and  ( publication.document != null) %}
+                        <a href="{{asset('uploads/publications/documents/'~publication.document)}}" class="btn-doc glyphicon glyphicon-save" target="_blank" aria-hidden="true" title="ver documento"></a>
+                        {% endif%}  
+
+                        {% if (publication.image is defined) and  ( publication.image != null) %}
+                        <span class="toggle-visibility-img glyphicon glyphicon-picture" aria-hidden="true" title="ver/ocultar imagen"></span>
+                        <div class="container-img-publication">
+                            <img src="{{asset('uploads/publications/images/'~publication.image)}}" >
+                        </div>
+                        {% endif%}  
+                    </div>  
+                      
                </div>
                {% endfor %}
            </div>
