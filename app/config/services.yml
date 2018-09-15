@@ -38,3 +38,6 @@ services:
             $doctrine: "@doctrine"
         tags:
             - {name:twig.extension}
+    AppBundle\Twig\LongTimeExtension:
+        tags:
+            - {name:twig.extension}

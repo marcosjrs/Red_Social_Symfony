@@ -14,7 +14,7 @@
                         <img src="{{asset('uploads/users/'~publication.user.image)}}" class="img-circle">
                     {% endif%}   
                     <div class="publication-item-content">
-                        <div> <a class="link-user" href="">{{publication.user.nick}}</a> <span class="item-content-time">{{publication.createdAt |date('d-m-Y')}}</span></div>
+                        <div> <a class="link-user" href="">{{publication.user.nick}}</a> <span class="item-content-time">{{publication.createdAt |long_time}}</span></div>
                         <div>{{publication.text}}</div> 
                     </div>             
                </div>
