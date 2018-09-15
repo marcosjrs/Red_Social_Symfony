@@ -67,6 +67,11 @@ body{
     padding-bottom: 20px;
 }
 
+#timeline .publication-item{
+    border-bottom: 1px solid #cccccc;
+    padding-bottom: 10px;
+}
+
 .publication-item .img-circle{
     width: 60px;
     height: 60px;

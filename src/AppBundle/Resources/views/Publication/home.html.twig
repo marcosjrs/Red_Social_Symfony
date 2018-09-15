@@ -1,5 +1,12 @@
 
 {% extends "@App/Layouts/layout.html.twig" %}
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript"> 
+        var URL_PRELOADER_USER = "{{asset('assets/images/ajax-loader.gif')}}"; 
+    </script>
+    <script src="{{asset('assets/js/custom/home.js')}}"></script>
+{% endblock %}
 {% block content %}
    <div class="container">
        <div id="timeline" class="col-md-7 box-default pull-left">
@@ -18,7 +25,6 @@
                         <div>{{publication.text}}</div> 
                     </div>             
                </div>
-                <hr/>
                {% endfor %}
            </div>
            <div class="navigation">
