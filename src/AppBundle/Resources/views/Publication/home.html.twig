@@ -1,5 +1,41 @@
 
 {% extends "@App/Layouts/layout.html.twig" %}
 {% block content %}
-    <div class="container">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione amet, ullam nisi saepe nam voluptatem, ab ipsa eius quibusdam voluptate quidem voluptatum error ducimus, esse praesentium quod ipsum qui quia.</div> 
+   <div class="container">
+       <div id="timeline" class="col-md-7 box-default pull-left">
+           <h1  class="box-header">Timeline</h1>
+           {#mensajes del usuario y de los que sigue#}
+           <div class="box-content">
+               {% for publication in pagination %}
+                <div>{{publication.text}}</div> 
+                <div>- {{publication.user.name}}</div>
+                <hr/>
+               {% endfor %}
+           </div>
+           <div class="navigation">
+               {{knp_pagination_render(pagination)}}
+           </div>
+       </div>
+       <div id="user-card" class="col-md-4 box-default pull-left">
+           <div class="avatar">
+                {% if app.user.image == null %}
+                <img src="{{asset('uploads/users/default.png')}}" class="img-circle">
+            {% else %}
+                <img src="{{asset('uploads/users/'~app.user.image)}}" class="img-circle">
+            {% endif%}
+            </div>
+
+            <div class="name-surname">
+                <a href="">{{app.user.name}} {{app.user.surname}}</a>
+                <div class="clearfix"></div>
+                <span class="nickname">{{app.user.nick}} </span>
+            </div>
+
+       </div>
+       <div id="new-publication" class="col-md-4 box-default pull-left">
+            <h1 class="box-header">Crear Publicación </h1>
+            {{form_start(form, {action:'', method:'POST'})}}
+            {{form_end(form)}}
+        </div>
+   </div>
 {% endblock %}
