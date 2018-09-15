@@ -14,7 +14,7 @@ $(document).ready(function(){
 
       //escuchamos la carga de los bloques de usuarios, para cargar los listeners
       ias.on('ready', function(event){ followButtons() });
-      ias.on('ready', function(event){ followButtons() });
+      ias.on('rendered', function(event){ followButtons() });
 });
 
 function followButtons(){

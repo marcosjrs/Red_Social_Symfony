@@ -4,6 +4,7 @@
     {{ parent() }}
     <script type="text/javascript"> 
         var URL_PRELOADER_USER = "{{asset('assets/images/ajax-loader.gif')}}"; 
+        var URL_REMOVE_PUBLICATIONS_SERVICE = "{{path('remove_publication')}}"; 
     </script>
     <script src="{{asset('assets/js/custom/home.js')}}"></script>
 {% endblock %}
@@ -23,6 +24,9 @@
                     <div class="publication-item-content">
                         <div> <a class="link-user" href="">{{publication.user.nick}}</a> <span class="item-content-time">{{publication.createdAt |long_time}}</span></div>
                         <div>{{publication.text}}</div> 
+                        {% if (app.user.id is defined) and  ( app.user.id == publication.user.id) %}
+                        <span data-id="{{publication.id}}" class="delete-publication glyphicon glyphicon-trash" aria-hidden="true" title="eliminación de publicación directa"></span>
+                        {% endif%} 
                         {% if (publication.document is defined) and  ( publication.document != null) %}
                         <a href="{{asset('uploads/publications/documents/'~publication.document)}}" class="btn-doc glyphicon glyphicon-save" target="_blank" aria-hidden="true" title="ver documento"></a>
                         {% endif%}  

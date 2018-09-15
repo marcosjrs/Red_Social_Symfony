@@ -306,3 +306,25 @@ class FollowingExtension extends \Twig_Extension {
 ```
     <button class="btn btn-sm btn-success btn-follow {% if app.user|following(user) == true %} hidden {% endif%}" data-followed="{{user.id}}"><span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span> Seguir</button>
 ```
+
+## Ejemplo de recogida de parametros en la ruta "amigable"
+
+Supongamos que queremos poder borrar una publicación con la ruta: /publication_remove/ , siendo 7 el id de la publicación a borrar.
+
+En el .yml de enrutado correspondiente(en este caso en publications.yml) añadimos:
+```
+remove_publication:
+    path:     /publication_remove/{id}
+    defaults: { _controller: AppBundle:Publication:removePublication, id:null }
+```
+
+De esta forma podemos recoger el parametro nombrado como "id" en el Action correspondiente (en este caso removePublicationAction), de la siguiente forma :
+```
+public function removePublicationAction(Request $request, $id){
+   //...véase que el $id forma parte de los parametros de la función...
+} 
+
+```
+
+De esta forma, podríamos luego llamarlo directamente, implementando la url como un href o llamando con una función de ajax, del estilo:
+

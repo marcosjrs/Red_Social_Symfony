@@ -7,6 +7,8 @@ use AppBundle\Form\PublicationType;
 use BackendBundle\Entity\Publication;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+
 class PublicationController extends Controller {
 
     private $session;
@@ -116,6 +118,29 @@ class PublicationController extends Controller {
         $page = $request->query->getInt('page',1);//carga el parametro page, por defecto será 1
         $pagination = $paginator->paginate( $query, $page, 5 );//5 elementos por bloque
         return $pagination;
+    }
+
+    public function removePublicationAction(Request $request, $id){
+        $em = $this->getDoctrine()->getManager();
+        $publicationRepo = $em->getRepository("BackendBundle:Publication");
+        $publication = $publicationRepo->find($id);
+
+        if($publication->getUser()->getId() == $this->getUser()->getId()){
+            try{
+                $em->remove($publication);
+                $em->flush();
+                $status = 'Publicación borrada correctamente';
+            }catch(\Doctrine\ORM\ORMInvalidArgumentException $exc2){
+                $status = 'No se han podido borrar la publicación';
+            }catch(Exception $exc){
+                $status = 'No se han podido borrar la publicación';
+            }
+        }else{
+            $status = 'No se han podido borrar la publicación';
+        }        
+
+        return new Response($status);
+
     }
 
 }

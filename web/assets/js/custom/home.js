@@ -13,12 +13,21 @@ $(document).ready(function(){
       ias.extension(new IASNoneLeftExtension({text: "No hay más publicaciones"}));
 
       //escuchamos la carga de los bloques de publicaciones, para cargar los listeners
-      ias.on('ready', function(event){ publicationButtons() });
-      ias.on('ready', function(event){ publicationButtons() });
+      ias.on('ready', function(event){ publicationButtons();  });
+      ias.on('rendered', function(event){  publicationButtons(); });
 });
 
 function publicationButtons(){
    $(".toggle-visibility-img").unbind("click").click(function(){
        $(this).parent().find(".container-img-publication").fadeToggle();
    });
+
+   $(".delete-publication").unbind("click").click(function(){
+        $(this).parent().parent().hide();
+        $.ajax({
+                url: URL_REMOVE_PUBLICATIONS_SERVICE+"/"+$(this).attr("data-id"),
+                type:'GET',
+                success:function(response){}
+            })
+    });
 }
