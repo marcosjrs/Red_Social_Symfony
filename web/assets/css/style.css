@@ -66,9 +66,9 @@ body{
     padding-bottom: 20px;
 }
 
-#timeline .publication-item{
+.publication-item{
     border-bottom: 1px solid #cccccc;
-    padding-bottom: 10px;
+    padding-bottom: 5px;
 }
 
 .publication-item .img-circle{
@@ -80,6 +80,7 @@ body{
 .publication-item  .publication-item-content{
     padding: 10px;
     margin-left: 55px;
+    border-bottom: 1px
 }
 
 .publication-item  .publication-item-content .item-content-time{

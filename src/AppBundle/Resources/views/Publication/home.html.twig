@@ -26,7 +26,7 @@
                              {% endif%}   
                              <div class="publication-item-content">
                                  
-                                 <div> <a class="link-user" href="">{{publication.user.nick}}</a> <span class="item-content-time">{{publication.createdAt |long_time}}</span></div>
+                                 <div> <a class="link-user" href="{{path("profile_user", {"nickname": publication.user.nick}) }}" >{{publication.user.nick}}</a> <span class="item-content-time">{{publication.createdAt |long_time}}</span></div>
                                  <div>{{publication.text}}</div> 
                                  {% if (app.user.id is defined) and  ( app.user.id == publication.user.id) %}
                                  <span data-id="{{publication.id}}" class="delete-publication glyphicon glyphicon-trash" aria-hidden="true" title="eliminación de publicación directa"></span>
@@ -68,7 +68,7 @@
             </div>
 
             <div class="name-surname">
-                <a href="">{{app.user.name}} {{app.user.surname}}</a>
+                <a href="{{path("profile_user", {"nickname": app.user.nick}) }}" >{{app.user.name}} {{app.user.surname}}</a>
                 <div class="clearfix"></div>
                 <span class="nickname">{{app.user.nick}} </span>
             </div>

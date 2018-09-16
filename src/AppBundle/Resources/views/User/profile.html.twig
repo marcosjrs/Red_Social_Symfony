@@ -10,21 +10,21 @@
 {% block content %}
     <div class="col-xs-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2 profile-box">
         <div class="col-xs-12 text-center user-info">
-            {% if app.user.image == null %}
+            {% if user.image == null %}
                 <img src="{{asset('uploads/users/default.png')}}" class="img-circle">
             {% else %}
-                <img src="{{asset('uploads/users/'~app.user.image)}}" class="img-circle">
+                <img src="{{asset('uploads/users/'~user.image)}}" class="img-circle">
             {% endif%}
             <div class="name-surname">
-                <h3>{{app.user.name}} {{app.user.surname}}</h3>
-                <div class="nickname">{{app.user.nick}} </div>
-                <div class="bio">{{app.user.bio}} </div>
+                <h3>{{user.name}} {{user.surname}}</h3>
+                <div class="nickname">{{user.nick}} </div>
+                <div class="bio">{{user.bio}} </div>
             </div>
             <div class="clearfix"></div>
         </div>
         <div class="row user-stats">
             <div class="col-xs-12 col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2">
-                {% set userStats = app.user|user_stats %}
+                {% set userStats = user|user_stats %}
                 <div class="col-xs-3 following-data data-stat">
                     <a href="#">
                         <span class="label-stat">Siguiendo</span>
