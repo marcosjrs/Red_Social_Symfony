@@ -2,10 +2,10 @@
 {% extends "@App/Layouts/layout.html.twig" %}
 {% block javascripts %}
     {{ parent() }}
-    {# 
-    <script type="text/javascript">  var URL_CHECK_NICK_EXISTS = "{{path('check_nick_exists')}}"; </script>
-    <script src="{{asset('assets/js/custom/check-nick-exists.js')}}"></script> 
-    #}
+     <script type="text/javascript"> 
+        var URL_PRELOADER_USER = "{{asset('assets/images/ajax-loader.gif')}}"; 
+    </script>
+    {<script src="{{asset('assets/js/custom/profile.js')}}"></script>
 {% endblock %}
 {% block content %}
     <div class="col-xs-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2 profile-box">
