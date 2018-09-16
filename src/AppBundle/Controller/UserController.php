@@ -187,4 +187,27 @@ class UserController extends Controller
             'pagination' => $pagination
         ));
     }
+    
+    public function profileAction(Request $request, $nickname = null){
+        $em = $this->getDoctrine()->getManager();
+
+        if($nickname != null){
+            $userRepo = $em->getRepository("BackendBundle:User");
+            $user = $userRepo->findOneBy(array("nick"=>$nickname));
+        }else{
+            $user = $this->getUser();
+        }
+
+        $userId = $user->getId();
+        $query = $em->createQuery("Select p FROM BackendBundle:Publication p WHERE p.user=$userId ORDER BY p.id DESC");
+        //Utilizamos el paginador para obtener los datos de la query de forma paginada.
+        $paginator = $this->get("knp_paginator");
+        $numItemsShowForPage = 5;
+        $pagination = $paginator->paginate($query, $request->query->getInt('page',1), $numItemsShowForPage);
+        
+        return $this->render('@App/User/profile.html.twig', array(
+            'user'=>$user,
+            'pagination' => $pagination
+        ));
+    }
 }

@@ -61,8 +61,8 @@
                                 {{app.user.name}} {{app.user.surname}} <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a href="{{path("edit_user")}}" ><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Mi perfil</a></li>
-                                {#<li><a href="" ><span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Mis Datos</a></li>#}
+                                <li><a href="{{path("profile_user", {"nickname": app.user.nick}) }}" ><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Mi perfil</a></li>
+                                <li><a href="{{path("edit_user")}}" ><span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Modificar datos</a></li>
                                 <li role="separator" class="divider"></li>
                                 <li><a href="{{path('logout')}}" ><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Cerrar sesión</a></li>
                                 <li><a href="" ><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> Ayuda</a></li>

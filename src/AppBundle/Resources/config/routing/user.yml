@@ -15,6 +15,10 @@ register:
 edit_user:
     path: /edit-user
     defaults: { _controller: AppBundle:User:editUser }
+
+profile_user:
+    path: /profile/{nickname}
+    defaults: { _controller: AppBundle:User:profile }
     
 check_nick_exists:
     path: /check-nick-exists
