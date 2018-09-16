@@ -46,3 +46,8 @@ services:
             $doctrine: "@doctrine"
         tags:
             - {name:twig.extension}
+    AppBundle\Twig\UserStatsExtension:
+        arguments:
+            $doctrine: "@doctrine"
+        tags:
+            - {name:twig.extension}

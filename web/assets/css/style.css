@@ -62,7 +62,6 @@ body{
 
 /* Home */
 #timeline{
-    margin-right: 20px;
     min-height: 700px;
     padding-bottom: 20px;
 }
@@ -121,7 +120,6 @@ body{
 }
 
 #user-card{
-    padding: 10px;
     margin-bottom: 15px;
 }
 
@@ -154,6 +152,25 @@ body{
     opacity: 0.7;
 }
 
+#user-card .data-stat
+{
+    text-align: center;
+    border-top: 1px solid #ccc;
+    padding: 5px;
+    margin-top:10px;
+}
+
+#user-card .data-stat a
+{
+    display: block;
+    color: black;
+}
+
+#user-card .data-stat .number-stat
+{
+    display: block;
+    font-weight: bold;
+}
 
 .box-header{
     border-bottom: 1px solid #ccc;

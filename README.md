@@ -307,6 +307,7 @@ class FollowingExtension extends \Twig_Extension {
     <button class="btn btn-sm btn-success btn-follow {% if app.user|following(user) == true %} hidden {% endif%}" data-followed="{{user.id}}"><span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span> Seguir</button>
 ```
 
+Nota: Si en lugar de devolver un boolean, devolviese un array,.. en el .twig podríamos recoger el valor, de la siguiente forma: ```{% set objetoValores = app.user|filtroQueDevuelveArray %}``` y luego utilizarla en el resto del .twig por ejemplo ```{{objetoValores.valor1}}```
 ## Ejemplo de recogida de parametros en la ruta "amigable"
 
 Supongamos que queremos poder borrar una publicación con la ruta: /publication_remove/ , siendo 7 el id de la publicación a borrar.
