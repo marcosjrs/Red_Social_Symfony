@@ -26,7 +26,7 @@
             <div class="col-xs-12 col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2">
                 {% set userStats = user|user_stats %}
                 <div class="col-xs-3 following-data data-stat">
-                    <a href="#">
+                    <a href="{{path("following_users", {"nickname": user.nick}) }}">
                         <span class="label-stat">Siguiendo</span>
                         <span class="number-stat">{{userStats.following}}</span>
                     </a>

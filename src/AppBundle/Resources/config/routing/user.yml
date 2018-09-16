@@ -18,7 +18,7 @@ edit_user:
 
 profile_user:
     path: /profile/{nickname}
-    defaults: { _controller: AppBundle:User:profile }
+    defaults: { _controller: AppBundle:User:profile, nickname:null }
     
 check_nick_exists:
     path: /check-nick-exists
