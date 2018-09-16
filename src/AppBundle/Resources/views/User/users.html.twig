@@ -27,7 +27,8 @@
                             <img src="{{asset('uploads/users/'~user.image)}}" class="img-circle">
                         {% endif%}
                         <div class="user-item-content">
-                            <div class="info-name">{{user.name}} {{user.surname}} - {{user.nick}}</div>
+                            <div class="info-name">
+                            <a href="{{path("profile_user", {"nickname": user.nick}) }}" >{{user.name}} {{user.surname}}</a> - {{user.nick}}</div>
                             <div class="info-bio">{{user.bio}}</div> 
                         </div>
                         {% if user.id != app.user.id %}
