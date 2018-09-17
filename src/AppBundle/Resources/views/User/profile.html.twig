@@ -47,7 +47,7 @@
                 </div>
 
                 <div class="col-xs-3 likes-data data-stat">
-                    <a href="#">
+                    <a href="{{path("user_likes", {"nickname": user.nick}) }}">
                         <span class="label-stat">Me gustas</span>
                         <span class="number-stat">{{userStats.likes}}</span>
                     </a>

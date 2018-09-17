@@ -12,12 +12,17 @@
 {% endblock %}
 {% block content %}
    <div class="container">       
-       <div id="container-timeline"  class="col-md-7 pull-left">
+       <div id="container-timeline"  class="col-md-12 pull-left">
             <div id="timeline" class="box-default">
-                    <h1  class="box-header">Timeline</h1>
+                    <h1  class="box-header">Publicaciones que le gustan a {{profile_user.nick}}</h1>
+                     <div class="count">
+                        <span class="label label-primary"> <span class="glyphicon glyphicon-heart-empty" aria-hidden="true" title="Likes"></span> {{pagination.getTotalItemCount}}</span>
+                    </div>
+
                     {#mensajes del usuario y de los que sigue#}
                     <div class="box-content">
-                        {% for publication in pagination %}
+                        {% for like in pagination %}
+                        {% set publication = like.publication %}
                         <div class="col-lg-12 publication-item">
                              {% if publication.user.image == null %}
                                  <img src="{{asset('uploads/users/default.png')}}" class="img-circle">
@@ -58,59 +63,5 @@
                     </div>
                 </div>
        </div>
-       <div id="user-card" class="col-md-5 box-default pull-left">
-           <div class="avatar">
-            {% if app.user.image == null %}
-                <img src="{{asset('uploads/users/default.png')}}" class="img-circle">
-            {% else %}
-                <img src="{{asset('uploads/users/'~app.user.image)}}" class="img-circle">
-            {% endif%}
-            </div>
-
-            <div class="name-surname">
-                <a href="{{path("profile_user", {"nickname": app.user.nick}) }}" >{{app.user.name}} {{app.user.surname}}</a>
-                <div class="clearfix"></div>
-                <span class="nickname">{{app.user.nick}} </span>
-            </div>
-            <div class="clearfix"></div>
-
-           <div class="row">
-                {% set userStats = app.user|user_stats %}
-                <div class="col-xs-3 following-data data-stat">
-                    <a href="{{path("following_users", {"nickname": app.user.nick}) }}">
-                        <span class="label-stat">Siguiendo</span>
-                        <span class="number-stat">{{userStats.following}}</span>
-                    </a>
-                </div>
-
-                <div class="col-xs-3 followers-data data-stat">
-                    <a href="{{path("followed_users", {"nickname": app.user.nick}) }}">
-                        <span class="label-stat">Seguidores</span>
-                        <span class="number-stat">{{userStats.followers}}</span>
-                    </a>
-                </div>
-    
-                <div class="col-xs-3 publications-data data-stat">
-                    <a href="{{path("profile_user", {"nickname": app.user.nick}) }}">
-                        <span class="label-stat">Publicaciones</span>
-                        <span class="number-stat">{{userStats.publications}}</span>
-                    </a>
-                </div>
-    
-                <div class="col-xs-3 likes-data data-stat">
-                    <a  href="{{path("user_likes", {"nickname": publication.user.nick}) }}">
-                        <span class="label-stat">Me gustas</span>
-                        <span class="number-stat">{{userStats.likes}}</span>
-                    </a>
-                </div>
-           </div>
-
-
-       </div>
-       <div id="new-publication" class="col-md-5 box-default pull-left">
-            <h1 class="box-header">Crear Publicación </h1>
-            {{form_start(form, {action:'', method:'POST'})}}
-            {{form_end(form)}}
-        </div>
    </div>
 {% endblock %}

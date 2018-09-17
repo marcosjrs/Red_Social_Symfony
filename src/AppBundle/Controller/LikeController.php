@@ -68,4 +68,33 @@ class LikeController extends Controller {
 
     }
 
+    /**
+     * Objetos Like ( que contiene campos publicacion y user), de forma paginada, de un user con un nick concreto.
+     */
+    public function likesAction (Request $request, $nickname = null)
+    {
+        $em = $this->getDoctrine()->getManager();
+        
+        if($nickname != null){
+            $userRepo = $em->getRepository("BackendBundle:User");
+            $user = $userRepo->findOneBy(array("nick"=>$nickname));
+        }else{
+            $user = $this->getUser();
+        }
+
+        $userId = $user->getId();
+        $query = $em->createQuery("Select l FROM BackendBundle:Like l WHERE l.user=$userId ORDER BY l.id DESC");
+        
+        //Utilizamos el paginador para obtener los datos de la query de forma paginada.
+        $paginator = $this->get("knp_paginator");
+        $numItemsShowForPage = 5;
+        $pagination = $paginator->paginate($query, $request->query->getInt('page',1), $numItemsShowForPage);
+        
+        return $this->render('@App/Like/like.html.twig', array(
+            'profile_user'=>$user,
+            'pagination' => $pagination ) );
+        
+        
+    }
+
 }
