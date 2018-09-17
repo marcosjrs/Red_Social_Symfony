@@ -218,6 +218,10 @@ body{
     margin-bottom:20px;
 }
 
+.btn-sm{
+    line-height: 14px;
+}
+
 /* Footer*/
 .fixed-bottom {
     position: fixed;

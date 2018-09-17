@@ -3,7 +3,9 @@
 {% block javascripts %}
     {{ parent() }}
      <script type="text/javascript"> 
-        var URL_PRELOADER_USER = "{{asset('assets/images/ajax-loader.gif')}}"; 
+        var URL_PRELOADER_USER = "{{asset('assets/images/ajax-loader.gif')}}";   
+        var URL_UNFOLLOW_SERVICE = "{{path('following_unfollow')}}"; 
+        var URL_FOLLOW_SERVICE = "{{path('following_follow')}}"; 
     </script>
     {<script src="{{asset('assets/js/custom/profile.js')}}"></script>
 {% endblock %}
@@ -21,6 +23,13 @@
                 <div class="bio">{{user.bio}} </div>
             </div>
             <div class="clearfix"></div>
+           
+             {% if user.id != app.user.id %}
+                <div class="container-btn-follow">
+                    <button class="btn btn-sm btn-success btn-follow {% if app.user|following(user) == true %} hidden {% endif%}" data-followed="{{user.id}}"><span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span> Seguir</button>
+                    <button class="btn btn-sm btn-default btn-unfollow  {% if app.user|following(user) == false %} hidden {% endif%}" data-followed="{{user.id}}"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span> Dejar de seguir</button>
+                </div>
+            {% endif%} 
         </div>
         <div class="row user-stats">
             <div class="col-xs-12 col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2">
