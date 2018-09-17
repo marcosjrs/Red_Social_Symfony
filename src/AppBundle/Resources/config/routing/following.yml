@@ -10,4 +10,8 @@ following_users:
     path: /following/{nickname}
     defaults: { _controller: AppBundle:Following:following, nickname:null }
     methods: [GET]
+followed_users:
+    path: /followed/{nickname}
+    defaults: { _controller: AppBundle:Following:followed, nickname:null }
+    methods: [GET]
     

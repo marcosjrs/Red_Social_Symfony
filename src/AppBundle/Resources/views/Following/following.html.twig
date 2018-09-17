@@ -13,9 +13,9 @@
     <div class="container">
         <div class="col-xs-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2 box-default">
             {% if type == 'following' %}
-            <h1>Gente a la que sigues</h1>
+            <h3>Gente que sigue {{ profile_user.nick }}</h3>
             {% else %}
-            <h1>Gente que nos sigue</h1>
+            <h3>Seguidores de {{ profile_user.nick }}</h3>
             {% endif %}
             <div class="count">
                 <span class="label label-primary">Número total de personas: {{pagination.getTotalItemCount}}</span>

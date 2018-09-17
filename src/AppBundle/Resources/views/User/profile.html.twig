@@ -33,14 +33,14 @@
                 </div>
 
                 <div class="col-xs-3 followers-data data-stat">
-                    <a href="#">
+                    <a href="{{path("followed_users", {"nickname": user.nick}) }}">
                         <span class="label-stat">Seguidores</span>
                         <span class="number-stat">{{userStats.followers}}</span>
                     </a>
                 </div>
 
                 <div class="col-xs-3 publications-data data-stat">
-                    <a href="#">
+                    <a href="{{path("profile_user", {"nickname":user.nick}) }}">
                         <span class="label-stat">Publicaciones</span>
                         <span class="number-stat">{{userStats.publications}}</span>
                     </a>
