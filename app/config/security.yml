@@ -42,3 +42,26 @@ security:
             logout:
                 path: logout
                 target: /
+    access_control:
+        # En /login y en/register puede entrar los usuarios no autenticados, anonimos
+        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY}
+        - { path: ^/register, roles: IS_AUTHENTICATED_ANONYMOUSLY}
+        # En la mayoria de las rutas solo pueden entrar los usuarios con ROLE_USER o ROLE_ADMIN
+        - { path: ^/edit-user, roles: [ROLE_USER, ROLE_ADMIN]}
+        - { path: ^/profile, roles: [ROLE_USER, ROLE_ADMIN]}
+        - { path: ^/people, roles: [ROLE_USER, ROLE_ADMIN]}
+        - { path: ^/people, roles: [ROLE_USER, ROLE_ADMIN]}
+        - { path: ^/search, roles: [ROLE_USER, ROLE_ADMIN]}
+        - { path: ^/search, roles: [ROLE_USER, ROLE_ADMIN]}
+        - { path: ^/check-nick-exists, roles: [ROLE_USER, ROLE_ADMIN]}
+        - { path: ^/home, roles: [ROLE_USER, ROLE_ADMIN]}
+        - { path: ^//publication_remove/, roles: [ROLE_USER, ROLE_ADMIN]}
+        - { path: ^/user, roles: [ROLE_USER, ROLE_ADMIN]}
+        - { path: ^/like, roles: [ROLE_USER, ROLE_ADMIN]}        
+        - { path: ^/follow, roles: [ROLE_USER, ROLE_ADMIN]}
+        - { path: ^/unfollow, roles: [ROLE_USER, ROLE_ADMIN]}
+        - { path: ^/following, roles: [ROLE_USER, ROLE_ADMIN]}
+        - { path: ^/followed, roles: [ROLE_USER, ROLE_ADMIN]}
+        - { path: ^/like, roles: [ROLE_USER, ROLE_ADMIN]}
+        - { path: ^/unlike, roles: [ROLE_USER, ROLE_ADMIN]}
+        - { path: ^/likes, roles: [ROLE_USER, ROLE_ADMIN]}

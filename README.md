@@ -329,3 +329,15 @@ public function removePublicationAction(Request $request, $id){
 
 De esta forma, podríamos luego llamarlo directamente, implementando la url como un href o llamando con una función de ajax
 
+## Ejemplo de control de acceso mediante configuración 
+Para configuración de control de acceso, podemos hacerlo modificando el archivo security.yml, dentro de nodo security. 
+Un ejemplo, con diferentes tipos de acceso sería:
+
+```
+access_control:
+        # En /login y en/register puede entrar los usuarios no autenticados, anonimos
+        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY}
+        # En la mayoria de las rutas solo pueden entrar los usuarios con ROLE_USER o ROLE_ADMIN
+        - { path: ^/edit-user, roles: [ROLE_USER, ROLE_ADMIN]}
+```
+
