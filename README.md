@@ -24,7 +24,7 @@ Enlaces de interés sobre la versión de symfony utilizada:
 
 ## Problemas al crear los bundles por comandos
 Tras ejecutar el comando correspondiente para añadir el bundle, en este caso uno llamado BackendBundle (que era el primer bundle creado) :
-`php .\bin\console generate:bundle`
+`php .\bin\console generate:bundle --namespace=BackendBundle --format=yml`
 
 Lo que hice fue:
 1. Sustituir el contenido del "psr-4" del composer.json, por:
