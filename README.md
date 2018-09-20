@@ -28,8 +28,9 @@ Tras ejecutar el comando correspondiente para añadir el bundle, en este caso un
 
 Lo que hice fue:
 1. Sustituir el contenido del "psr-4" del composer.json, por:
-`"psr-4": {
-            "": "src/"
+` "psr-4": {
+            "AppBundle\\": "src/AppBundle",
+            "BackendBundle\\": "src/BackendBundle"
         }`
 
 2. Ejecutar el comando: 
